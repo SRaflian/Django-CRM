@@ -1,0 +1,3 @@
+Username for django db admin
+username : admin
+ps       : passworddjango   
