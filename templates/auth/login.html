@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if warning_message %}
+    <div class="warning">
+        {{ warning_message }}
+    </div>
+{% endif %}
+
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if not user.is_authenticated %}
+    <form method="post" action="{% url 'my_custom_login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+{% else %}
+    <a href="{% url 'logout' %}">Logout</a>
+{% endif %}
+
+{% endblock %}
