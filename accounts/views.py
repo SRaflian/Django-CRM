@@ -61,19 +61,22 @@ def my_custom_logout_view(request: HttpRequest):
     return redirect('home')  # Make sure 'home' corresponds to the name of your homepage URL pattern.
 
 
+from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from .forms import SignUpForm
+from .forms import CustomUserCreationForm
 
 def register(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('/')  # Redirect to a success page (e.g., home)
+            form.save()
+            return redirect('login')  # Adjust the redirect as necessary
+        else:
+            # Handle form errors
+            print(form.errors)  # For debugging
     else:
-        form = SignUpForm()
+        form = CustomUserCreationForm()
     return render(request, 'auth/register.html', {'form': form})
 
 
