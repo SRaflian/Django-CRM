@@ -3,6 +3,9 @@
 {% block content %}
 <div class="container mt-3">
     <h2>Record Dashboard</h2>
+    <div class="mb-3">
+        <a href="{% url 'add_record' %}" class="btn btn-success">Add Record</a>
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -30,7 +33,7 @@
                 <td>{{ record.state }}</td>
                 <td>{{ record.zipcode }}</td>
 			    <td>{{ record.created_at }}</td>
-                <!-- Display more fields as needed -->
+                <td><a href="{% url 'customer_record' record.id %}">{{ record.id }}</a></td>
             </tr>
             {% empty %}
             <tr>
@@ -40,7 +43,4 @@
         </tbody>
     </table>
 </div>
-
-<a href="{% url 'logout' %}">Logout</a>
-
 {% endblock %}

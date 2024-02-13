@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Record</title>
+</head>
+<body>
+    <h2>Customer Record: {{ record.first_name }} {{ record.last_name }}</h2>
+    <p><strong>Email:</strong> {{ record.email }}</p>
+    <p><strong>Phone:</strong> {{ record.phone }}</p>
+    <p><strong>Address:</strong> {{ record.address }}</p>
+    <p><strong>City:</strong> {{ record.city }}</p>
+    <p><strong>State:</strong> {{ record.state }}</p>
+    <p><strong>Zipcode:</strong> {{ record.zipcode }}</p>
+    {% comment %} <a href="{% url 'edit_record' record.id %}">Edit Record</a> <!-- Assuming you have an edit view --> {% endcomment %}
+</body>
+</html>
+
+{% endblock %}
