@@ -10,6 +10,10 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
+from django.shortcuts import render, redirect
+from .forms import CustomUserCreationForm
 
 # # Create your views here.
 # class UserLoginView(LoginView):
@@ -51,7 +55,7 @@ def my_custom_login_view(request: HttpRequest):
 
 # succes redirect
 def success_view(request):
-    return redirect('home')
+    return redirect('record-dashboard')
 
 def my_custom_logout_view(request: HttpRequest):
     logout(request)
@@ -59,12 +63,6 @@ def my_custom_logout_view(request: HttpRequest):
     messages.add_message(request, messages.SUCCESS, 'You have successfully logged out.')
     # Redirect to the homepage
     return redirect('home')  # Make sure 'home' corresponds to the name of your homepage URL pattern.
-
-
-from django.contrib.auth.forms import UserCreationForm
-from django.views import generic
-from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
 
 def register(request):
     if request.method == 'POST':
@@ -78,5 +76,4 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'auth/register.html', {'form': form})
-
 
