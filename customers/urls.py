@@ -6,6 +6,7 @@ urlpatterns = [
     path('dashboard/', views.Record_dashboard, name='record-dashboard'),
     path('record/<int:id>/', views.customer_record_view, name='customer_record'),
     path('record/add/', views.add_record, name='add_record'),
+    path('record/<int:id>/delete/', views.delete_record, name='delete_record'),
 ]
 
 

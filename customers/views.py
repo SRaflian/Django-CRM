@@ -12,10 +12,12 @@ def Record_dashboard(request):
     records = Record.objects.all()  # Fetch all records from the database
     return render(request, 'customers/record-dashboard.html', {'records': records})
 
+@login_required
 def customer_record_view(request, id):
     record = get_object_or_404(Record, id=id)
     return render(request, 'customers/record/individual-record.html', {'record': record})
 
+@login_required
 def add_record(request):
 	form = AddRecordForm(request.POST or None)
 	if request.user.is_authenticated:
@@ -25,5 +27,14 @@ def add_record(request):
 				messages.success(request, "Record Added...")
 				return redirect(reverse('record-dashboard'))
 		return render(request, 'customers/add-record.html', {'form':form})
+
+@login_required
+def delete_record(request, id):
+    if request.method == "POST":
+        record = get_object_or_404(Record, id=id)
+        record.delete()
+        messages.success(request, "Record successfully deleted.")
+        return redirect('record-dashboard')
+    
 
 
