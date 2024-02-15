@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'record-view' %}" class="btn btn-info">Record View</a>
+<a href="{% url 'account_details' %}" class="btn btn-info">Account Details</a>
+
+
+{% endblock %}

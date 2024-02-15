@@ -10,6 +10,19 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
+from django.shortcuts import render, redirect
+from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .forms import UserEditForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import render
 
 # # Create your views here.
 # class UserLoginView(LoginView):
@@ -36,7 +49,7 @@ def my_custom_login_view(request: HttpRequest):
             if user is not None:
                 if not request.user.is_authenticated:
                     login(request, user)
-                    return redirect('some_success_url')  # Adjust this to where you want to redirect users
+                    return redirect('record-dashboard')  # Adjust this to where you want to redirect users
                 else:
                     warning_message = 'You are already logged in.'
     else:
@@ -49,15 +62,41 @@ def my_custom_login_view(request: HttpRequest):
     }
     return render(request, 'auth/login.html', context)
 
-# succes redirect
-def success_view(request):
-    return redirect('home')
+# # succes redirect
+# def success_view(request):
+#     return redirect('record-dashboard')
 
 def my_custom_logout_view(request: HttpRequest):
     logout(request)
-    # Add a logout message
     messages.add_message(request, messages.SUCCESS, 'You have successfully logged out.')
-    # Redirect to the homepage
-    return redirect('home')  # Make sure 'home' corresponds to the name of your homepage URL pattern.
+    return redirect('login')
+
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Adjust the redirect as necessary
+        else:
+            # Handle form errors
+            print(form.errors)  # For debugging
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'auth/register.html', {'form': form})
 
 
+@login_required  # Ensures that only logged-in users can access this view
+def account_details(request):
+    user = request.user  # Gets the currently logged-in user
+    return render(request, 'auth/details.html', {'user': user})
+
+@login_required
+def edit_account(request):
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('account_details')  # Redirect to the details view
+    else:
+        form = UserEditForm(instance=request.user)
+    return render(request, 'auth/edit-account.html', {'form': form})
