@@ -13,6 +13,11 @@ def Record_dashboard(request):
     return render(request, 'customers/record-dashboard.html', {'records': records})
 
 @login_required
+def Record_view(request):
+    records = Record.objects.all()  # Fetch all records from the database
+    return render(request, 'customers/record-view.html', {'records': records})
+
+@login_required
 def customer_record_view(request, id):
     record = get_object_or_404(Record, id=id)
     return render(request, 'customers/record/individual-record.html', {'record': record})
@@ -25,7 +30,7 @@ def add_record(request):
 			if form.is_valid():
 				form.save()
 				messages.success(request, "Record Added...")
-				return redirect(reverse('record-dashboard'))
+				return redirect(reverse('record-view'))
 		return render(request, 'customers/add-record.html', {'form':form})
 
 @login_required
@@ -34,7 +39,7 @@ def delete_record(request, id):
         record = get_object_or_404(Record, id=id)
         record.delete()
         messages.success(request, "Record successfully deleted.")
-        return redirect('record-dashboard')
+        return redirect('record-view')
     
 @login_required
 def edit_record(request, id):
@@ -44,7 +49,7 @@ def edit_record(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, "Record successfully updated.")
-            return redirect('record-dashboard')
+            return redirect('record-view')
     else:
         form = AddRecordForm(instance=record)
     return render(request, 'customers/record/edit-record.html', {'form': form, 'record_id': record.id})
