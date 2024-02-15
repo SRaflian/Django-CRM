@@ -1,7 +1,30 @@
 {% extends "base.html" %}
-
+{% load widget_tweaks %}
 {% block title %}Login Page{% endblock %}
 
+{% block extra_blocks %}
+{% comment %} <link rel="stylesheet" type="text/css" href="templates/auth/css/login.css"> {% endcomment %}
+<style>
+    .formContainer {
+        box-shadow : 4px 8px 16px #d7d7d7;
+        margin:20vh auto;
+        padding:20px;
+        border-radius:0px 0px 4px 4px;
+        }
+    
+    input {
+        box-shadow:none !important;
+        outline:none;
+    }
+    
+    #formHeading {
+        background:#212529;
+        margin:-20px;
+        border-radius:4px 4px 0px 0px;
+        color:#fff;
+    }
+</style>
+{% endblock %}
 {% block content %}
 
 {% if warning_message %}
@@ -15,11 +38,30 @@
 {% endif %}
 
 {% if not user.is_authenticated %}
-    <form method="post" action="{% url 'my_custom_login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+<div class="p-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 col-sm-6 col-lg-3 mx-auto">
+          <div class="formContainer">
+            <h2 class="p-2 text-center mb-4 h4" id="formHeading">Login</h2>
+            <form method="post" action="{% url 'my_custom_login' %}">
+              {% csrf_token %}
+              <div class="form-group mt-3">
+                <label class="mb-2" for="username">Username</label>
+                {% render_field form.username type="text" class="form-control" id="id_username" placeholder="Username" %}
+              </div>
+              <div class="form-group mt-3">
+                <label class="mb-2" for="password">Password</label>
+                {% render_field form.password type="password" class="form-control" id="id_password" placeholder="Password" %}
+              </div>
+              <button class="btn btn-success btn-lg w-100 mt-4" type="submit">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
 {% else %}
     <a href="{% url 'logout' %}">Logout</a>
 {% endif %}
