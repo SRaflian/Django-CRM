@@ -59,10 +59,8 @@ def success_view(request):
 
 def my_custom_logout_view(request: HttpRequest):
     logout(request)
-    # Add a logout message
     messages.add_message(request, messages.SUCCESS, 'You have successfully logged out.')
-    # Redirect to the homepage
-    return redirect('home')  # Make sure 'home' corresponds to the name of your homepage URL pattern.
+    return redirect('login')
 
 def register(request):
     if request.method == 'POST':
