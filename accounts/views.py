@@ -40,7 +40,7 @@ def my_custom_login_view(request: HttpRequest):
             if user is not None:
                 if not request.user.is_authenticated:
                     login(request, user)
-                    return redirect('some_success_url')  # Adjust this to where you want to redirect users
+                    return redirect('record-dashboard')  # Adjust this to where you want to redirect users
                 else:
                     warning_message = 'You are already logged in.'
     else:
@@ -53,9 +53,9 @@ def my_custom_login_view(request: HttpRequest):
     }
     return render(request, 'auth/login.html', context)
 
-# succes redirect
-def success_view(request):
-    return redirect('record-dashboard')
+# # succes redirect
+# def success_view(request):
+#     return redirect('record-dashboard')
 
 def my_custom_logout_view(request: HttpRequest):
     logout(request)
