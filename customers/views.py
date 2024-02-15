@@ -36,5 +36,18 @@ def delete_record(request, id):
         messages.success(request, "Record successfully deleted.")
         return redirect('record-dashboard')
     
+@login_required
+def edit_record(request, id):
+    record = get_object_or_404(Record, id=id)
+    if request.method == "POST":
+        form = AddRecordForm(request.POST, instance=record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Record successfully updated.")
+            return redirect('record-dashboard')
+    else:
+        form = AddRecordForm(instance=record)
+    return render(request, 'customers/record/edit-record.html', {'form': form, 'record_id': record.id})
+    
 
 
