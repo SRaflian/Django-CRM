@@ -18,3 +18,12 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+    

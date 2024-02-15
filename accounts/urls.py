@@ -6,4 +6,6 @@ urlpatterns = [
     # path('success/', views.success_view, name='some_success_url'),
     path('logout/', views.my_custom_logout_view, name='logout'),
     path('register/', views.register, name='register'),
+    path('account/details/', views.account_details, name='account_details'),
+    path('account/edit/', views.edit_account, name='edit_account'),
 ]

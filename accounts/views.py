@@ -14,6 +14,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .forms import UserEditForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import render
 
 # # Create your views here.
 # class UserLoginView(LoginView):
@@ -75,3 +84,19 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, 'auth/register.html', {'form': form})
 
+
+@login_required  # Ensures that only logged-in users can access this view
+def account_details(request):
+    user = request.user  # Gets the currently logged-in user
+    return render(request, 'auth/details.html', {'user': user})
+
+@login_required
+def edit_account(request):
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('account_details')  # Redirect to the details view
+    else:
+        form = UserEditForm(instance=request.user)
+    return render(request, 'auth/edit-account.html', {'form': form})

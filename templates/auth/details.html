@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Account Details</h2>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <!-- You can add more fields if you've extended the User model -->
+</div>
+<a href="{% url 'edit_account' %}" class="btn btn-info">Edit</a>
+{% endblock %}
