@@ -1,34 +1,15 @@
-from django.shortcuts import render
 from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpRequest
-from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib import messages
-from django.http import HttpRequest
-from django.contrib.auth.forms import UserCreationForm
-from django.views import generic
-from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 from .forms import UserEditForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.shortcuts import render
-
-# # Create your views here.
-# class UserLoginView(LoginView):
-#     template_name = 'accounts/login.html'
-#     redirect_authenticated_user = True
-#     success_url = reverse_lazy('home')  # Replace 'home' with the name of the URL you want to redirect to after login
 
 # Login 
 def my_custom_login_view(request: HttpRequest):
@@ -61,10 +42,6 @@ def my_custom_login_view(request: HttpRequest):
         'warning_message': warning_message,
     }
     return render(request, 'auth/login.html', context)
-
-# # succes redirect
-# def success_view(request):
-#     return redirect('record-dashboard')
 
 def my_custom_logout_view(request: HttpRequest):
     logout(request)
