@@ -1,0 +1,12 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1020; /* Bootstrap's default z-index for navbar is 1030, adjust if necessary */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adds shadow for depth */
+  }
+  
+  body {
+    padding-top: 56px; /* Adjust this value based on the actual height of your navbar */
+  }
