@@ -1,0 +1,12 @@
+.hover-button {
+    text-decoration: none; /* Optional: removes the underline from links */
+    color: initial; /* Optional: keeps the text color consistent */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
+  }
+  
+  .hover-button:hover {
+    background-color: green; /* Change to your preferred shade of green */
+    color: white; /* Change text color to improve contrast and readability */
+    padding: 5px 10px; /* Add some padding to look like a button */
+    border-radius: 5px; /* Optional: adds rounded corners to the button */
+  }
