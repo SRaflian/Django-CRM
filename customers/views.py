@@ -7,9 +7,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.db.models.functions import ExtractMonth
 from django.db.models import Count
-from .models import Record
 import datetime
-from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
