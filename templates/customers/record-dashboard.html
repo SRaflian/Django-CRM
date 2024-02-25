@@ -19,6 +19,7 @@
     }
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %}
 
 {% block body_blocks %}
@@ -58,7 +59,35 @@
       </div>
   </div>
   
-  <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+  {% comment %} <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> {% endcomment %}
+  <canvas id="customerChart" width="400" height="200"></canvas>  
+  <script>
+    var ctx = document.getElementById('customerChart').getContext('2d');
+    var customerCounts = {{ customer_counts|safe }};
+    var maxYValue = Math.max(...customerCounts) + 20; // Find the max value and add 20
+
+    var customerChart = new Chart(ctx, {
+        type: 'line', // or 'bar', 'pie', etc.
+        data: {
+            labels: {{ months|safe }},
+            datasets: [{
+                label: 'Customers per Month',
+                data: customerCounts,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: maxYValue // Set the maximum value for the Y-axis
+                }
+            }
+        }
+    });
+</script>
 </div>
 </main>
 
