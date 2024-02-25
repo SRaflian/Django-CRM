@@ -36,8 +36,30 @@
       </button> -->
     </div>
   </div>
+    <div class="container mt-1">
+      <div class="row">
+          <!-- Total Customers Box -->
+          <div class="col-md-6">
+              <div class="card text-white mb-3" style="background: linear-gradient(to right, #007bff, #004085);">
+                  <div class="card-body">
+                      <h2 class="card-title">Total Customers: {{ total_count }}</h2>
+                  </div>
+              </div>
+          </div>
+  
+          <!-- Unique States Box -->
+          <div class="col-md-6">
+              <div class="card text-white mb-3" style="background: linear-gradient(to right, #28a745, #155724);">
+                  <div class="card-body">
+                      <h2 class="card-title">Unique States: {{ unique_states_count }}</h2>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
   <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
+</div>
 </main>
 
 
