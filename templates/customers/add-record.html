@@ -42,22 +42,33 @@
 {% endblock %}
 
 {% block body_blocks %}
-<div class="col-md-6 offset-md-3">
-  <h1>Add Record</h1>
-  <br />
-
-  <form method="POST" action="{% url 'add_record' %}">
-    {% csrf_token %}
-
-    {{ form.as_p }}
-
-    <br />
-    <button type="submit" class="btn btn-secondary">Add Record</button>
-    <a href="{% url 'record-view' %}" class="btn btn-secondary">Back</a>
-
-  </form>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Add Record</h1>
+    <!-- <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group me-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      </div>
+      <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+        <span data-feather="calendar"></span>
+        This week
+      </button>
+    </div> -->
+  </div>
+  <div class="container-fluid">
+    <form method="POST" action="{% url 'add_record' %}">
+      {% csrf_token %}
+  
+      {{ form.as_p }}
+  
+      <br />
+      <button type="submit" class="btn btn-secondary">Add Record</button>
+      <a href="{% url 'record-view' %}" class="btn btn-secondary">Back</a>
+  
+    </form>
 </div>
-
+</main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
